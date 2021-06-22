@@ -1,0 +1,6 @@
+--find-links https://download.pytorch.org/whl/torch_stable.html
+scikit-image
+pyngrok==4.1.1
+streamlit
+einops
+gdown==3.12.2

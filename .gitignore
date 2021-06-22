@@ -1,0 +1,12 @@
+/weights/*
+!/weights/__init__.py
+/center/weights/*.pth
+/center/models/DCNv2/_ext
+/center/models/DCNv2/build
+/center/models/DCNv2/DCNv2.egg-info
+/center/models/DCNv2/dist
+/data/*
+/line_detection_module/models/networks/DCNv2/_ext
+/line_detection_module/models/networks/DCNv2/build
+/line_detection_module/models/networks/DCNv2/DCNv2.egg-info
+/line_detection_module/models/networks/DCNv2/dist
