@@ -4,7 +4,7 @@ import streamlit as st
 import SessionState
 import numpy as np
 from PIL import Image
-from cmnd_ocr import TEXT_IMAGES
+from ocr_engine import TEXT_IMAGES
 state = SessionState.get(result_text="", res="", prob_positive=0.0, prob_negative= 0.0, initial=True, img_drawed=None, img_cropped=None, reg_text_time=None)
 
 
