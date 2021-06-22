@@ -1,4 +1,4 @@
-from .aligh import CENTER_MODEL
+from .detect_box import get_box
 from .demo  import Predictor
 
-__all__ = [Predictor, CENTER_MODEL]
+__all__ = [Predictor, get_box]

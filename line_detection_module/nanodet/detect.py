@@ -2,8 +2,8 @@ import os
 import cv2
 import torch
 import numpy as np
-from .demo import Predictor
-from .aligh import CENTER_MODEL
+from .detector import Predictor
+from .detector import detect_box
 
 def detect_line(im):
     """
@@ -30,8 +30,6 @@ def detect_line(im):
     predictor = Predictor()
     _, res = predictor.inference(im)
     
-    center_model = CENTER_MODEL()
-    img_aligh, point = center_model.aligh(im, res)
-    if not point:
-        return img_aligh, False
-    return img_aligh, True
+    info = detect_box[res]
+    
+    return info
