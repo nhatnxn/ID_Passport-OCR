@@ -49,7 +49,8 @@ def page_eKYC(state, model):
     img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
     if img_file_buffer is not None:
         pil_image = Image.open(img_file_buffer)
-        cv_image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+        # cv_image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+        cv_image = np.array(pil_image)
         # print(cv_image.shape)
 
         # CMND detection
@@ -80,13 +81,8 @@ def page_eKYC(state, model):
                 st.error("Not detected ID card")
         with col1:
             if state.img_drawed is not None:
+                st.image(cv_image, use_column_width=True)
                 st.image(state.img_drawed, use_column_width=True)
-
-        # if state.img_cropped is not None:
-        #     st.title("Chi tiết:")
-        #     for idx, img in enumerate(state.img_cropped):
-        #         st.image(img, caption=state.result_text[idx])
-        #         st.empty()
 
 if __name__ == "__main__":
     main()

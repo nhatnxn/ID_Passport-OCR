@@ -113,7 +113,7 @@ class LineDetection(object):
         for idx, label in enumerate(list_label):
             if len(info[label]) == 4:
                 box = info[label]
-                cv2.rectangle(img_res, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), self.colors[idx], 2, 2)
+                cv2.rectangle(img_res, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), self.colors[idx], 1, 1)
 
         # Crop line
         result_line_img = {}
