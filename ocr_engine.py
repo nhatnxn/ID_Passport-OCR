@@ -14,7 +14,7 @@ import time
 
 class TEXT_IMAGES(object):
 
-    def __init__(self, line_model='yolov5', card_model='yolov5', text_model='vietocr', reg_model='vgg_seq2seq', ocr_weight_path='weights/vgg-seq2seq.pth'):
+    def __init__(self, latency=False, line_model='yolov5', card_model='yolov5', text_model='vietocr', reg_model='vgg_seq2seq', ocr_weight_path='weights/vgg-seq2seq.pth'):
         print("Loading TEXT_MODEL...")
         # cmnd_detect_config = Cfg.load_config_from_file(cmnd_detect_config_path)
         # self.cmnd_detect_module = CENTER_MODEL(cmnd_detect_config)
@@ -26,13 +26,20 @@ class TEXT_IMAGES(object):
         config['device'] = 'cpu'
         config['predictor']['beamsearch'] = False
         self.recognition_text_module = Predictor(config)
+        self.latency = latency
 
     def get_content_image(self, image, show_line=False):
         # cv image
         # return image_drawed, texts, boxes
+        
         t1 = time.time()
         img_detected, have_card = self.card_detect_module.predict_card(image)
         t_card = time.time() - t1
+        if self.latency:
+            t1 = time.time()
+            for i in range(20):
+                img_detected, have_card = self.card_detect_module.predict_card(image)
+            t_card = (time.time() - t1)/20
         if not have_card:
             print("Không phát hiện ID card")
             return None, None
@@ -40,6 +47,11 @@ class TEXT_IMAGES(object):
         t2 = time.time()
         result_line_img, img_draw_box = self.line_detect_module.predict_box(img_detected)
         t_line = time.time() - t2
+        if self.latency:
+            t2 = time.time()
+            for i in range(20):
+                result_line_img, img_draw_box = self.line_detect_module.predict_box(img_detected)
+            t_line = (time.time() - t2)/20
 
         result_ocr = {}
         for key, value in result_line_img.items():
@@ -51,6 +63,12 @@ class TEXT_IMAGES(object):
             t3 = time.time()
             res_str = self.recognition_text_module.predict(img)
             t_ocr = time.time() - t3
+            if self.latency:
+                t3 = time.time()
+                for i in range(20):
+                    res_str = self.recognition_text_module.predict(img)
+                t_ocr = (time.time() - t3)/20
+
             result_ocr[label].append(res_str)
 
         print(result_ocr)

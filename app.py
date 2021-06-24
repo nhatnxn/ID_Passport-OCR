@@ -24,11 +24,12 @@ def main():
     # st.title('Model Options')
     st.sidebar.subheader('Model Options')
     
+    latency = st.sidebar.selectbox('Latency mesurement', [False,True])
     card_model = st.sidebar.selectbox('Card detection', ['yolov5','nanodet'])
     line_model = st.sidebar.selectbox('Fields detection', ['yolov5', 'nanodet'])
     text_model = st.sidebar.selectbox('Text recognition', ['VietOCR', 'PaddleOCR'])
     
-    model = load_model(card_model, line_model, text_model)
+    model = load_model(latency, card_model, line_model, text_model)
 
     pages[page](state, model)
 
@@ -36,9 +37,9 @@ def main():
 
 
 @st.cache(allow_output_mutation=True)  # hash_func
-def load_model(card_model, line_model, text_model):
+def load_model(latency, card_model, line_model, text_model):
     print("Loading model ...")
-    model = TEXT_IMAGES(line_model=line_model, card_model=card_model, text_model=text_model, reg_model='vgg_seq2seq', ocr_weight_path='weights/seq2seqocr_best.pth')
+    model = TEXT_IMAGES(latency=latency, line_model=line_model, card_model=card_model, text_model=text_model, reg_model='vgg_seq2seq', ocr_weight_path='weights/seq2seqocr_best.pth')
     return model
 
 
