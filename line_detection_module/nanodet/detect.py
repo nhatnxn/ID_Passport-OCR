@@ -3,7 +3,7 @@ import cv2
 import torch
 import numpy as np
 from .detector import Predictor
-from .detector import detect_box
+from .detector import get_box
 
 def detect_line(im):
     """
@@ -30,6 +30,6 @@ def detect_line(im):
     predictor = Predictor()
     _, res = predictor.inference(im)
     
-    info = detect_box[res]
+    info = get_box(res)
     
     return info

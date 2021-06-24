@@ -10,7 +10,7 @@ from .models.experimental import attempt_load
 from utils.torch_utils import select_device
 from utils.general import check_img_size, non_max_suppression, xywh2xyxy, xyxy2xywh, scale_coords
 
-MODEL_PATH  = os.path.join(os.path.dirname(__file__), 'weights', 'yolov5s_thalas.pt')
+MODEL_PATH  = os.path.join(os.path.dirname(__file__), 'weights', 'line_yolov5s.pt')
 IMG_SIZE    = 640
 CONF_THES   = 0.3
 
@@ -147,15 +147,15 @@ def polygon_from_corners(t):
         t[i][3], t[i][5] = (y - h/2, y + h/2)
 
 
-    address_1   =   t[t[:,1] == 6]
-    address_2   =   t[t[:,1] == 7]
+    address_1   =   t[t[:,1] == 8]
+    address_2   =   t[t[:,1] == 9]
     birthday    =   t[t[:,1] == 3]
-    hometown_1  =   t[t[:,1] == 4]
-    hometown_2  =   t[t[:,1] == 5]
-    ids         =   t[t[:,1] == 2]
-    name        =   t[t[:,1] == 0]
-    nation      =   t[t[:,1] == 1]
-    sex         =   t[t[:,1] == 8]
+    hometown_1  =   t[t[:,1] == 6]
+    hometown_2  =   t[t[:,1] == 7]
+    ids         =   t[t[:,1] == 0]
+    name        =   t[t[:,1] == 2]
+    nation      =   t[t[:,1] == 5]
+    sex         =   t[t[:,1] == 4]
 
     # if t0.shape[0] == 0 or t1.shape[0] == 0 or t2.shape[0] == 0 or t3.shape[0] == 0:
     #     return None

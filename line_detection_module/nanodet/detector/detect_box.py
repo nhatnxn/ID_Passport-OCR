@@ -17,20 +17,19 @@ def get_box(res):
     nation      =   points[7][0]
     sex         =   points[8][0]
     
+    THRESHOLD = 0.3
+
     info = {}
 
-    ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex']
-
-
-    info['address_line_1']  =   address_1
-    info['address_line_2']  =   address_2
-    info['birthday']        =   birthday
-    info['hometown_line_1'] =   hometown_1
-    info['hometown_line_2'] =   hometown_2
-    info['id']              =   ids
-    info['name']            =   name
-    info['nation']          =   nation
-    info['sex']             =   sex
+    info['address_line_1']  =   address_1   if address_1[-1] > THRESHOLD    else []
+    info['address_line_2']  =   address_2   if address_2[-1] > THRESHOLD    else []
+    info['birthday']        =   birthday    if birthday[-1] > THRESHOLD     else []
+    info['hometown_line_1'] =   hometown_1  if hometown_1[-1] > THRESHOLD   else []
+    info['hometown_line_2'] =   hometown_2  if hometown_2[-1] > THRESHOLD   else []
+    info['id']              =   ids         if ids[-1] > THRESHOLD          else []
+    info['name']            =   name        if name[-1] > THRESHOLD         else []
+    info['nation']          =   nation      if nation[-1] > THRESHOLD       else []
+    info['sex']             =   sex         if sex[-1] > THRESHOLD          else []
 
     return info
 

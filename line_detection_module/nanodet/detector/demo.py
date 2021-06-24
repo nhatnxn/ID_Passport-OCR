@@ -14,9 +14,9 @@ from ..nanodet.util.path import mkdir
 
 image_ext = ['.jpg', '.jpeg', '.webp', '.bmp', '.png']
 video_ext = ['mp4', 'mov', 'avi', 'mkv']
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'weights', 'nanodet_m-1.5x-416.ckpt')
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'weights', 'line_nanodet_m-1.5x-416.ckpt')
 LOGGER = Logger(-1, use_tensorboard=False)
-config_path = ''
+config_path = os.path.join(os.path.dirname(__file__), 'config', 'line_nanodet-m-1.5x-416.yml')
 load_config(cfg,config_path)
 device = torch.device('cpu')
 

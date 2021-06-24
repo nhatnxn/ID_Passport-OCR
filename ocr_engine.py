@@ -1,6 +1,7 @@
+from time import time
 import cv2
 
-from center_DCNv2.utils.config import Cfg
+# from center_DCNv2.utils.config import Cfg
 # from line_detection_module.model_box import LineDetection
 # from detect import CENTER_MODEL
 # from center.nanodet.detector.dectect import detect_card
@@ -8,13 +9,14 @@ from detect_card import CardDetection
 from detect_line import LineDetection
 from vietocr.tool.config import Cfg_reg
 from vietocr.tool.predictor import Predictor
+import time
 
 
 class TEXT_IMAGES(object):
 
-    def __init__(self, cmnd_detect_config_path='./center/config/cmnd.yml', line_model='yolov5', card_model='yolov5', reg_model='vgg_seq2seq', ocr_weight_path='weights/vgg-seq2seq.pth'):
+    def __init__(self, line_model='yolov5', card_model='yolov5', text_model='vietocr', reg_model='vgg_seq2seq', ocr_weight_path='weights/vgg-seq2seq.pth'):
         print("Loading TEXT_MODEL...")
-        cmnd_detect_config = Cfg.load_config_from_file(cmnd_detect_config_path)
+        # cmnd_detect_config = Cfg.load_config_from_file(cmnd_detect_config_path)
         # self.cmnd_detect_module = CENTER_MODEL(cmnd_detect_config)
         self.card_detect_module = CardDetection(card_model)
         self.line_detect_module = LineDetection(line_model)
@@ -28,11 +30,16 @@ class TEXT_IMAGES(object):
     def get_content_image(self, image, show_line=False):
         # cv image
         # return image_drawed, texts, boxes
+        t1 = time.time()
         img_detected, have_card = self.card_detect_module.predict_card(image)
+        t_card = time.time() - t1
         if not have_card:
             print("Không phát hiện ID card")
             return None, None
+        
+        t2 = time.time()
         result_line_img, img_draw_box = self.line_detect_module.predict_box(img_detected)
+        t_line = time.time() - t2
 
         result_ocr = {}
         for key, value in result_line_img.items():
@@ -41,11 +48,13 @@ class TEXT_IMAGES(object):
             result_ocr[label] = []
 
             # for img in imgs:
+            t3 = time.time()
             res_str = self.recognition_text_module.predict(img)
+            t_ocr = time.time() - t3
             result_ocr[label].append(res_str)
 
         print(result_ocr)
-        return result_ocr, img_draw_box
+        return result_ocr, img_draw_box, t_card, t_line, t_ocr
 
 
 

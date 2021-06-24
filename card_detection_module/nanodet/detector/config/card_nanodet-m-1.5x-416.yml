@@ -5,7 +5,7 @@
 #           AP_small = 0.098
 #               AP_m = 0.277
 #               AP_l = 0.420
-save_dir: /content/drive/MyDrive/VinBrain/ID Card OCR/Implement/fields_detection/checkpoint
+save_dir: /content/drive/MyDrive/VinBrain/ID Card OCR/Implement/NanoDet/checkpoint
 model:
   arch:
     name: OneStageDetector
@@ -22,7 +22,7 @@ model:
       num_outs: 3
     head:
       name: NanoDetHead
-      num_classes: 9
+      num_classes: 4
       input_channel: 128
       feat_channels: 128
       stacked_convs: 2
@@ -48,9 +48,8 @@ model:
 data:
   train:
     name: coco
-    img_path: /content/JPEGImages/eKYC/Dewarped/
+    img_path: /content
     ann_path: /content/drive/MyDrive/VinBrain/ID Card OCR/Implement/NanoDet/all_train.json
-
     input_size: [416,416] #[w,h]
     keep_ratio: True
     pipeline:
@@ -67,8 +66,8 @@ data:
       normalize: [[103.53, 116.28, 123.675], [57.375, 57.12, 58.395]]
   val:
     name: coco
-    img_path: /content/JPEGImages/eKYC/Dewarped/
-    ann_path: /content/drive/MyDrive/VinBrain/ID Card OCR/Implement/voc2coco/data/coco/cmnd_test.json
+    img_path: /content
+    ann_path: /content/drive/MyDrive/VinBrain/ID Card OCR/Implement/NanoDet/all_val.json
     input_size: [416,416] #[w,h]
     keep_ratio: True
     pipeline:
@@ -102,4 +101,4 @@ evaluator:
 log:
   interval: 10
 
-class_names: ['address_line_1','address_line_2','birthday','hometown_line_1','hometown_line_2','id','name','nation','sex']
+class_names: ['0','1','2','3']

@@ -10,7 +10,7 @@ from .models.experimental import attempt_load
 from .utils.torch_utils import select_device
 from .utils.general import check_img_size, non_max_suppression, xywh2xyxy, xyxy2xywh, scale_coords
 
-MODEL_PATH  = os.path.join(os.path.dirname(__file__), 'weights', 'yolov5s_thalas.pt')
+MODEL_PATH  = os.path.join(os.path.dirname(__file__), 'weights', 'card_yolov5s.pt')
 IMG_SIZE    = 640
 CONF_THES   = 0.3
 
