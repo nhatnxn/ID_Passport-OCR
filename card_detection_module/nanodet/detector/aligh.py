@@ -12,7 +12,7 @@ class CENTER_MODEL(object):
         source_points = self.get_cornor_point(list_points)
         if not source_points:
             return image, False
-        print('source_points: ', source_points)
+        # print('source_points: ', source_points)
         point = np.float32([source_points[0],source_points[1],source_points[2],source_points[3]])
         # image = cv2.imread(image_path)
         max_width = max(abs(source_points[1][0]-source_points[0][0]), abs(source_points[2][0]-source_points[3][0]))
