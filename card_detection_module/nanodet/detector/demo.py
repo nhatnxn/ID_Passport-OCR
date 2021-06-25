@@ -1,4 +1,4 @@
-from card_detection_module.nanodet.nanodet.util import config
+from ..nanodet.util import config
 from torch._C import device
 from yaml import load
 import cv2
@@ -19,6 +19,9 @@ LOGGER = Logger(-1, use_tensorboard=False)
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'card_nanodet-m-1.5x-416.yml')
 load_config(cfg,config_path)
 device = torch.device('cpu')
+model = build_model(cfg.model)
+ckpt = torch.load(MODEL_PATH, map_location=lambda storage, loc: storage)
+load_model_weight(model, ckpt, logger)
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -33,12 +36,12 @@ def parse_args():
 
 
 class Predictor(object):
-    def __init__(self, cfg=cfg, model_path=MODEL_PATH, logger=LOGGER, device=device):
+    def __init__(self, cfg=cfg, model=model, logger=LOGGER, device=device):
         self.cfg = cfg
         self.device = device
-        model = build_model(cfg.model)
-        ckpt = torch.load(model_path, map_location=lambda storage, loc: storage)
-        load_model_weight(model, ckpt, logger)
+        # model = build_model(cfg.model)
+        # ckpt = torch.load(model_path, map_location=lambda storage, loc: storage)
+        # load_model_weight(model, ckpt, logger)
         if cfg.model.arch.backbone.name == 'RepVGG':
             deploy_config = cfg.model
             deploy_config.arch.backbone.update({'deploy': True})

@@ -1,4 +1,4 @@
-f https://download.pytorch.org/whl/torch_stable.html
+--find-links https://download.pytorch.org/whl/torch_stable.html
 torch==1.8.0+cpu
 torchvision==0.9.0+cpu
 torchtext==0.9.0
@@ -11,3 +11,4 @@ streamlit
 einops
 pytorch_lightning
 gdown==3.12.2
+pycocotools
