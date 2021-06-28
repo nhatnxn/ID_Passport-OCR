@@ -1,0 +1,1 @@
+python ppocr_rec.py --rec_char_type="latin" --use_gpu=False --image_dir=../../samples --rec_model_dir=weights --use_space_char=True --rec_char_dict_path=vi_dict.txt

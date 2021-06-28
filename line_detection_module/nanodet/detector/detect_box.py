@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.einsumfunc import _parse_possible_contraction
 from torch._C import device
 import cv2
 import argparse
@@ -16,6 +17,7 @@ def get_box(res):
     name        =   points[6][0]
     nation      =   points[7][0]
     sex         =   points[8][0]
+    passport    =   points[9][0]
     
     THRESHOLD = 0.3
 
@@ -30,6 +32,7 @@ def get_box(res):
     info['name']            =   name        if name[-1] > THRESHOLD         else []
     info['nation']          =   nation      if nation[-1] > THRESHOLD       else []
     info['sex']             =   sex         if sex[-1] > THRESHOLD          else []
+    info['passport']        =   passport    if passport[-1] > THRESHOLD     else []
 
     return info
 

@@ -25,7 +25,7 @@ class LineDetection(object):
         self.model = model
         self.colors = [(255, 0, 0), (0, 0, 255), (123, 2, 190),
                         (253, 124, 98) ,  (255, 251, 134), (128,256,0),
-                        (123,182,111), (21,234,56), (235,123,45)]
+                        (123,182,111), (21,234,56), (235,123,45), (123,231,43)]
         self.min_size = 1
         
     def predict_box(self, img):
@@ -70,7 +70,7 @@ class LineDetection(object):
         h_extend_size = 0.06
         w_extend_size = 0.04
         list_box = {}
-        list_label       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex']
+        list_label       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex', 'passport_id']
         
         # processing
         for inf in list_label:

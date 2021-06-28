@@ -26,7 +26,7 @@ def detect_bbox(im):
     """
     PADDING_SIZE    = 0
     info            = {}
-    list_dict       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex']
+    list_dict       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex', 'passport']
 
     # check input
     if im is None:

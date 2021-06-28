@@ -146,7 +146,6 @@ def polygon_from_corners(t):
         t[i][2], t[i][4] = (x - w/2, x + w/2)
         t[i][3], t[i][5] = (y - h/2, y + h/2)
 
-
     address_1   =   t[t[:,1] == 8]
     address_2   =   t[t[:,1] == 9]
     birthday    =   t[t[:,1] == 3]
@@ -156,6 +155,11 @@ def polygon_from_corners(t):
     name        =   t[t[:,1] == 2]
     nation      =   t[t[:,1] == 5]
     sex         =   t[t[:,1] == 4]
+    passport_id =   t[t[:,1] == 1]
+
+
+    
+
 
     # if t0.shape[0] == 0 or t1.shape[0] == 0 or t2.shape[0] == 0 or t3.shape[0] == 0:
     #     return None
@@ -168,9 +172,10 @@ def polygon_from_corners(t):
     name        =   best_bbox(name)[2:6] if len(name) != 0 else name
     nation      =   best_bbox(nation)[2:6] if len(nation) != 0 else nation
     sex         =   best_bbox(sex)[2:6] if len(sex) != 0 else sex
+    passport_id =   best_bbox(passport_id)[2:6] if len(passport_id) != 0 else passport_id
 
     
-    return (address_1, address_2, birthday, hometown_1, hometown_2, ids, name, nation, sex)
+    return (address_1, address_2, birthday, hometown_1, hometown_2, ids, name, nation, sex, passport_id)
 
 
 
