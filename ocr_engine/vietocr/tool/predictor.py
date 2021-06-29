@@ -1,7 +1,7 @@
 import cv2
 
-from vietocr.tool.translate import build_model, translate, translate_beam_search, process_input, predict, process_batch_input
-from vietocr.tool.utils import download_weights
+from .translate import build_model, translate, translate_beam_search, process_input, predict, process_batch_input
+from .utils import download_weights
 import numpy as np
 import matplotlib.pyplot as plt
 import torch

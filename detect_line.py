@@ -70,7 +70,7 @@ class LineDetection(object):
         h_extend_size = 0.06
         w_extend_size = 0.04
         list_box = {}
-        list_label       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex', 'passport_id']
+        list_label       = ['address_line_1','address_line_2', 'birthday', 'hometown_line_1', 'hometown_line_2', 'id', 'name', 'nation', 'sex', 'passport']
         
         # processing
         for inf in list_label:

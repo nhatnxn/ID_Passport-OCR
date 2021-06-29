@@ -7,8 +7,8 @@ import torch
 import matplotlib.pyplot as plt
 
 from .models.experimental import attempt_load
-from utils.torch_utils import select_device
-from utils.general import check_img_size, non_max_suppression, xywh2xyxy, xyxy2xywh, scale_coords
+from .utils.torch_utils import select_device
+from .utils.general import check_img_size, non_max_suppression, xywh2xyxy, xyxy2xywh, scale_coords
 
 MODEL_PATH  = os.path.join(os.path.dirname(__file__), 'weights', 'line_yolov5s.pt')
 IMG_SIZE    = 640

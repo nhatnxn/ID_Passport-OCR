@@ -1,9 +1,9 @@
-from models.paddleocr.ppocr_rec import load_ppocr_model
+from .models.paddleocr.ppocr_rec import load_ppocr_model
 import os
-import cv2
-
 import warnings
 warnings.filterwarnings("ignore")
+
+
 
 if __name__ == '__main__':
 
@@ -19,3 +19,4 @@ if __name__ == '__main__':
     imgs = [cv2.imread(f"samples/{img}") for img in os.listdir("samples")]
     res = paddleocr(imgs)
     print(res)
+

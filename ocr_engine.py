@@ -37,7 +37,7 @@ class TEXT_IMAGES(object):
             t_card = (time.time() - t1)/20
         if not have_card:
             print("Không phát hiện ID card")
-            return None, None
+            return None, None, None, None, None
         
         t2 = time.time()
         result_line_img, img_draw_box = self.line_detect_module.predict_box(img_detected)
@@ -48,26 +48,26 @@ class TEXT_IMAGES(object):
                 result_line_img, img_draw_box = self.line_detect_module.predict_box(img_detected)
             t_line = (time.time() - t2)/20
 
-        result_ocr = {}
-        for key, value in result_line_img.items():
-            label = key
-            img = value
-            result_ocr[label] = []
+        # result_ocr = {}
+        # for key, value in result_line_img.items():
+        #     label = key
+        #     img = value
+        #     result_ocr[label] = []
 
             # for img in imgs:
+        t3 = time.time()
+        res_str = self.recognition_text_module.get_ocr(result_line_img)
+        t_ocr = time.time() - t3
+        if self.latency:
             t3 = time.time()
-            res_str = self.recognition_text_module.get_ocr(img)
-            t_ocr = time.time() - t3
-            if self.latency:
-                t3 = time.time()
-                for i in range(20):
-                    res_str = self.recognition_text_module.get_ocr(img)
-                t_ocr = (time.time() - t3)/20
+            for i in range(20):
+                res_str = self.recognition_text_module.get_ocr(result_line_img)
+            t_ocr = (time.time() - t3)/20
 
-            result_ocr[label].append(res_str)
+            # result_ocr[label].append(res_str)
 
-        print(result_ocr)
-        return result_ocr, img_draw_box, t_card, t_line, t_ocr
+        print(res_str)
+        return res_str, img_draw_box, t_card, t_line, t_ocr
 
 
 

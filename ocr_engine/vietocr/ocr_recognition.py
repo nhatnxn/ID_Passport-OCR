@@ -1,7 +1,8 @@
 from .tool.config import Cfg_reg
 from .tool.predictor import Predictor
+import os
 
-MODEL_PATH = 'weights/vgg-seq2seq.pth'
+MODEL_PATH = os.path.join(os.path.dirname(__file__),'weights/vgg-seq2seq.pth')
 
 class OcrModel(object):
     
@@ -14,7 +15,7 @@ class OcrModel(object):
         config['predictor']['beamsearch'] = False
         self.recognition_text_module = Predictor(config)
 
-    def get_content_image(self, result_line_img):
+    def get_ocr(self, result_line_img):
 
         result_ocr = {}
         for key, value in result_line_img.items():
@@ -30,4 +31,4 @@ class OcrModel(object):
 if __name__ == '__main__':
     result_line_img = {}
     ocr_model = OcrModel()
-    result_ocr = ocr_model.get_content_image(result_line_img)
+    result_ocr = ocr_model.get_ocr(result_line_img)

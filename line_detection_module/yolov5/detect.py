@@ -13,15 +13,15 @@ def detect_line(im):
     Returns:
         dict:
             { 
-                'address_line_1':   [left,right,top,bottom]
-                'address_line_2':   [left,right,top,bottom]
-                'birthday':         [left,right,top,bottom]
-                'hometown_line_1':  [left,right,top,bottom]
-                'hometown_line_2':  [left,right,top,bottom]
-                'id':               [left,right,top,bottom]
-                'name':             [left,right,top,bottom]
-                'nation':           [left,right,top,bottom]
-                'sex':              [left,right,top,bottom]
+                'address_line_1':   [left,top,right,bottom]
+                'address_line_2':   [left,top,right,bottom]
+                'birthday':         [left,top,right,bottom]
+                'hometown_line_1':  [left,top,right,bottom]
+                'hometown_line_2':  [left,top,right,bottom]
+                'id':               [left,top,right,bottom]
+                'name':             [left,top,right,bottom]
+                'nation':           [left,top,right,bottom]
+                'sex':              [left,top,right,bottom]
             }
     '''
     info = detect_bbox(im)

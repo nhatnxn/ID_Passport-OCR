@@ -1,9 +1,10 @@
 from .models.paddleocr.ppocr_rec import load_ppocr_model
+import os
 import warnings
 warnings.filterwarnings("ignore")
 
-MODEL_PATH      = 'models/paddleocr/weights'
-DICT_PATH       = 'models/paddleocr/vi_dict.txt'
+MODEL_PATH      = os.path.join(os.path.dirname(__file__),'models/paddleocr/weights')
+DICT_PATH       = os.path.join(os.path.dirname(__file__),'models/paddleocr/vi_dict.txt')
 BATCH_SIZE      = 20
 MAX_TEXT_LENGTH = 43
 
@@ -26,6 +27,9 @@ class OcrModel(object):
             imgs.append(value)
         
         res_ocr = self.model(imgs)
+
+
+        
         for label, res in zip(labels, res_ocr):
             result_ocr[label] = res
 

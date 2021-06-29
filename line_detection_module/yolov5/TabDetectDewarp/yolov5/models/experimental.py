@@ -9,7 +9,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
 from .common import Conv, DWConv
-from utils.google_utils import attempt_download
+from ..utils.google_utils import attempt_download
 
 
 class CrossConv(nn.Module):

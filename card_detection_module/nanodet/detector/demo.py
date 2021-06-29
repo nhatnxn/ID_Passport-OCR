@@ -21,7 +21,7 @@ load_config(cfg,config_path)
 device = torch.device('cpu')
 model = build_model(cfg.model)
 ckpt = torch.load(MODEL_PATH, map_location=lambda storage, loc: storage)
-load_model_weight(model, ckpt, logger)
+load_model_weight(model, ckpt, LOGGER)
 
 def parse_args():
     parser = argparse.ArgumentParser()
