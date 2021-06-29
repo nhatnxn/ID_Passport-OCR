@@ -7,28 +7,23 @@ import cv2
 # from center.nanodet.detector.dectect import detect_card
 from detect_card import CardDetection
 from detect_line import LineDetection
-from vietocr.tool.config import Cfg_reg
-from vietocr.tool.predictor import Predictor
 import time
 
 
 class TEXT_IMAGES(object):
 
-    def __init__(self, latency=False, line_model='yolov5', card_model='yolov5', text_model='vietocr', reg_model='vgg_seq2seq', ocr_weight_path='weights/vgg-seq2seq.pth'):
+    def __init__(self, latency=False, line_model='yolov5', card_model='yolov5', text_model='vietocr', reg_model='vgg_seq2seq'):
         print("Loading TEXT_MODEL...")
-        # cmnd_detect_config = Cfg.load_config_from_file(cmnd_detect_config_path)
-        # self.cmnd_detect_module = CENTER_MODEL(cmnd_detect_config)
         self.card_detect_module = CardDetection(card_model)
         self.line_detect_module = LineDetection(line_model)
-
-        config = Cfg_reg.load_config_from_name(reg_model)
-        config['weights'] = ocr_weight_path
-        config['device'] = 'cpu'
-        config['predictor']['beamsearch'] = False
-        self.recognition_text_module = Predictor(config)
+        if text_model == 'paddleocr':
+            from ocr_engine.paddleocr import OcrModel
+        else:
+            from ocr_engine.vietocr import OcrModel
+        self.recognition_text_module = OcrModel()
         self.latency = latency
 
-    def get_content_image(self, image, show_line=False):
+    def get_content_image(self, image):
         # cv image
         # return image_drawed, texts, boxes
         
@@ -61,12 +56,12 @@ class TEXT_IMAGES(object):
 
             # for img in imgs:
             t3 = time.time()
-            res_str = self.recognition_text_module.predict(img)
+            res_str = self.recognition_text_module.get_ocr(img)
             t_ocr = time.time() - t3
             if self.latency:
                 t3 = time.time()
                 for i in range(20):
-                    res_str = self.recognition_text_module.predict(img)
+                    res_str = self.recognition_text_module.get_ocr(img)
                 t_ocr = (time.time() - t3)/20
 
             result_ocr[label].append(res_str)
