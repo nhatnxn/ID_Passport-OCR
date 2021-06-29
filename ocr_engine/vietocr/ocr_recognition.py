@@ -2,11 +2,13 @@ from .tool.config import Cfg_reg
 from .tool.predictor import Predictor
 import os
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__),'weights/vgg-seq2seq.pth')
+MODEL_PATH = os.path.join(os.path.dirname(__file__),'weights/transformerocr.pth')
+# MODEL_PATH = os.path.join(os.path.dirname(__file__),'weights/vgg-seq2seq.pth')
+
 
 class OcrModel(object):
     
-    def __init__(self, reg_model='vgg_seq2seq', ocr_weight_path=MODEL_PATH):
+    def __init__(self, reg_model='vgg_transformer', ocr_weight_path=MODEL_PATH):
         print("Loading TEXT_MODEL...")
 
         config = Cfg_reg.load_config_from_name(reg_model)
