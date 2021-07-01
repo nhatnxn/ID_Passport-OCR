@@ -146,16 +146,17 @@ def polygon_from_corners(t):
         t[i][2], t[i][4] = (x - w/2, x + w/2)
         t[i][3], t[i][5] = (y - h/2, y + h/2)
 
-    address_1   =   t[t[:,1] == 8]
-    address_2   =   t[t[:,1] == 9]
-    birthday    =   t[t[:,1] == 3]
-    hometown_1  =   t[t[:,1] == 6]
-    hometown_2  =   t[t[:,1] == 7]
-    ids         =   t[t[:,1] == 0]
-    name        =   t[t[:,1] == 2]
-    nation      =   t[t[:,1] == 5]
-    sex         =   t[t[:,1] == 4]
-    passport_id =   t[t[:,1] == 1]
+    if len(t)>0:
+        address_1   =   t[t[:,1] == 8]
+        address_2   =   t[t[:,1] == 9]
+        birthday    =   t[t[:,1] == 3]
+        hometown_1  =   t[t[:,1] == 6]
+        hometown_2  =   t[t[:,1] == 7]
+        ids         =   t[t[:,1] == 0]
+        name        =   t[t[:,1] == 2]
+        nation      =   t[t[:,1] == 5]
+        sex         =   t[t[:,1] == 4]
+        passport_id =   t[t[:,1] == 1]
 
 
     

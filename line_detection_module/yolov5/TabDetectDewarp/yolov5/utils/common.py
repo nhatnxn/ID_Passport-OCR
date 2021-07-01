@@ -20,10 +20,10 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
-from utils.datasets import letterbox
-from utils.general import non_max_suppression, make_divisible, scale_coords, increment_path, xyxy2xywh, save_one_box
-from utils.plots import colors, plot_one_box
-from utils.torch_utils import time_synchronized
+from .datasets import letterbox
+from .general import non_max_suppression, make_divisible, scale_coords, increment_path, xyxy2xywh, save_one_box
+from .plots import colors, plot_one_box
+from .torch_utils import time_synchronized
 
 
 def autopad(k, p=None):  # kernel, padding

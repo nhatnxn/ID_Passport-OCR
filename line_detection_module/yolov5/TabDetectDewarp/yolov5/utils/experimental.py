@@ -7,7 +7,7 @@ import torch.nn as nn
 import sys
 sys.path.append('..')
 
-from models.common import Conv, DWConv
+from ..models.common import Conv, DWConv
 from .google_utils import attempt_download
 
 
